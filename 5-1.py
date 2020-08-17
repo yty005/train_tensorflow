@@ -49,6 +49,7 @@ with tf.Session() as sess:
         sess.run(tf.assign(lr,0.01*(0.95 ** epoch)))
         for step in range(n_batch):
             batch_xs,batch_ys=minst.train.next_batch(batch_size)
+            print(batch_xs.shape, batch_ys.shape)
             sess.run(train_step,feed_dict={x:batch_xs,y:batch_ys,keep_drop:1.0})
         acc = sess.run(accuracy,feed_dict={x:minst.test.images,y:minst.test.labels,keep_drop:1.0})
         learning=sess.run(lr) 
